@@ -9,7 +9,7 @@ import Foundation
 
 //MARK: - 입출력
 
-print(solution(4))
+print(solution([1, 2, 3, 4, 5, 6, 7, 8, 9, 10]))
 
 //MARK: - 초급
 
@@ -64,8 +64,51 @@ print(solution(4))
 // MARK:  짝수의 합 (filter & reduce)
 // 정수 n이 주어질 때, n이하의 짝수를 모두 더한 값을 return 하도록 solution 함수를 작성해주세요.
 
-func solution(_ n:Int) -> Int {
-    return (1...n).filter { $0 % 2 == 0 }.reduce(0,+)
+//func solution(_ n:Int) -> Int {
+//    return (1...n).filter { $0 % 2 == 0 }.reduce(0,+)
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK:  최빈값 구하기 (딕셔너리 정렬)
+// 정수 n이 주어질 때, n이하의 짝수를 모두 더한 값을 return 하도록 solution 함수를 작성해주세요.
+
+//func solution(_ array:[Int]) -> Int {
+//
+//    var dic: [Int: Int] = [:]
+//    array.forEach { dic[$0] = dic[$0] ?? 0 + 1 }
+//
+//    let sortedDic = dic.sorted(by: {$0.1 > $1.1})
+//    if sortedDic.count == 1 { return sortedDic[0].key}
+//
+//    return sortedDic[0].value == sortedDic[1].value ? -1 : sortedDic[0].key
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 짝수는 싫어요 (filter)
+//정수 n이 매개변수로 주어질 때, n 이하의 홀수가 오름차순으로 담긴 배열을 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ n:Int) -> [Int] {
+////    var answer: [Int] = []
+////    (1...n).forEach{ if $0 % 2 != 0 { answer.append($0) } }
+//
+//    // filter로 배열 바로 필터링하기
+//    return (1...n).filter { $0 % 2 != 0 }
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 피자 나눠 먹기 (2) (filter)
+// 머쓱이네 피자가게는 피자를 여섯 조각으로 잘라 줍니다. 피자를 나눠먹을 사람의 수 n이 매개변수로 주어질 때, n명이 주문한 피자를 남기지 않고 모두 같은 수의 피자 조각을 먹어야 한다면 최소 몇 판을 시켜야 하는지를 return 하도록 solution 함수를 완성해보세요.
+
+//func solution(_ n:Int) -> Int {
+//    return (1...n).filter{ (6 * $0) % n == 0 }[0]
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 배열의 평균값 (reduce)
+//정수 배열 numbers가 매개변수로 주어집니다. numbers의 원소의 평균값을 return하도록 solution 함수를 완성해주세요.
+
+func solution(_ numbers:[Int]) -> Double {
+    return Double(numbers.reduce(0,+)) / Double(numbers.count)
 }
 
 //MARK: - 중급
