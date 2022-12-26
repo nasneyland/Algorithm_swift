@@ -61,7 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				FDBB9980295459520096DC08 /* cote */,
-				FDBB9990295472F40096DC08 /* programmers */,
+				FDBB9990295472F40096DC08 /* programmers_beginners */,
 				FDBB997F295459520096DC08 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -83,12 +83,12 @@
 			path = cote;
 			sourceTree = "<group>";
 		};
-		FDBB9990295472F40096DC08 /* programmers */ = {
+		FDBB9990295472F40096DC08 /* programmers_beginners */ = {
 			isa = PBXGroup;
 			children = (
 				FDBB9991295472F40096DC08 /* main.swift */,
 			);
-			path = programmers;
+			path = programmers_beginners;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
