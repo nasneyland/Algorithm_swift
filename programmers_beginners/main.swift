@@ -11,7 +11,8 @@
 import Foundation
 
 //let n = readLine()!.components(separatedBy: [" "]).map { Int($0)! }
-print(solution(976))
+print(solution("hello",1,2))
+
 // ------------------------------------------------------------------------------------------
 // MARK:  숫자 비교하기 (삼함연산자)
 // 정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면 -1을 retrun하도록 solution 함수를 완성해주세요.
@@ -60,7 +61,7 @@ print(solution(976))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK:  짝수의 합 (filter & reduce)
+// MARK:  짝수의 합 (filter & reduce-int)
 // 정수 n이 주어질 때, n이하의 짝수를 모두 더한 값을 return 하도록 solution 함수를 작성해주세요.
 
 //func solution(_ n:Int) -> Int {
@@ -103,7 +104,7 @@ print(solution(976))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 배열의 평균값 (reduce)
+// MARK: 배열의 평균값 (reduce-int)
 // 정수 배열 numbers가 매개변수로 주어집니다. numbers의 원소의 평균값을 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ numbers:[Int]) -> Double {
@@ -150,7 +151,7 @@ print(solution(976))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 제곱수 판별하기 (sqrt - 제곱근 구하는 함수)
+// MARK: 제곱수 판별하기 (sqrt - 제곱근 구하는 함수) (pow - 제곱)
 // 어떤 자연수를 제곱했을 때 나오는 정수를 제곱수라고 합니다. 정수 n이 매개변수로 주어질 때, n이 제곱수라면 1을 아니라면 2를 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ n:Int) -> Int {
@@ -158,4 +159,132 @@ print(solution(976))
 //
 //    // sqrt 함수 사용하기 - Double 형만 허용한다.
 //    return sqrt(Double(n)) == floor(sqrt(Double(n))) ? 1 : 2
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 자릿수 더하기 (character to int)
+// 정수 n이 매개변수로 주어질 때 n의 각 자리 숫자의 합을 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ n:Int) -> Int {
+//    var cnt = 0
+//    for i in String(n) {
+//        if let n = Int(String(i)) {
+//            cnt += n
+//        }
+//    }
+//    return cnt
+//
+//    return String(n).map{ Int(String($0))! }.reduce(0,+)
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 외계행성의 나이 (string-index)
+// 우주여행을 하던 머쓱이는 엔진 고장으로 PROGRAMMERS-962 행성에 불시착하게 됐습니다. 입국심사에서 나이를 말해야 하는데, PROGRAMMERS-962 행성에서는 나이를 알파벳으로 말하고 있습니다. a는 0, b는 1, c는 2, ..., j는 9입니다. 예를 들어 23살은 cd, 51살은 fb로 표현합니다. 나이 age가 매개변수로 주어질 때 PROGRAMMER-962식 나이를 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ age:Int) -> String {
+//    let english = "abcdefghijklmnopqrstuvwxyz"
+//    return String(age).map { String(english[english.index(english.startIndex, offsetBy: Int(String($0))!)]) }.joined()
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 숨어있는 숫자의 덧셈 (1) (compactMap / isNumber)
+// 문자열 my_string이 매개변수로 주어집니다. my_string안의 모든 자연수들의 합을 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ my_string:String) -> Int {
+//    var cnt = 0
+//    my_string.forEach {
+//        if let number = Int(String($0)) {
+//            cnt += number
+//        }
+//    }
+//    return cnt
+//
+//    // filter로 숫자 검증 -> 숫자로 변환 -> 모두 더하기
+//    return my_string.filter{$0.isNumber}.map{Int(String($0))!}.reduce(0, +)
+//    // compactMap을 사용하여 변환 자체를 검증 -> 모두 더하기
+//    return my_string.compactMap{Int(String($0))}.reduce(0,+)
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 모스부호 (1) (string-index, 배열-index) (딕셔너리) (reduce-string)
+// 머쓱이는 친구에게 모스부호를 이용한 편지를 받았습니다. 그냥은 읽을 수 없어 이를 해독하는 프로그램을 만들려고 합니다. 문자열 letter가 매개변수로 주어질 때, letter를 영어 소문자로 바꾼 문자열을 return 하도록 solution 함수를 완성해보세요.
+
+//func solution(_ letter:String) -> String {
+//
+//    // 배열, string 이용
+//    let morse = [".-","-...","-.-.","-..",".","..-.","--.","....","..",".---","-.-",".-..","--","-.","---",".--.","--.-",".-.","...","-","..-","...-",".--","-..-","-.--","--.."]
+//    let alphabet = "abcdefghijklmnopqrstuvwxyz"
+//
+//    return letter.components(separatedBy: " ").map {morse.firstIndex(of: $0)!}.map{String(alphabet[alphabet.index(alphabet.startIndex, offsetBy: $0)])}.joined()
+//
+//    // 딕셔너리 이용
+//    let morse = [
+//            ".-": "a", "-...": "b", "-.-.": "c", "-..": "d", ".": "e", "..-.": "f",
+//            "--.": "g", "....": "h", "..": "i", ".---": "j", "-.-": "k", ".-..": "l",
+//            "--": "m", "-.": "n", "---": "o", ".--.": "p", "--.-": "q", ".-.": "r",
+//            "...": "s", "-": "t", "..-": "u", "...-": "v", ".--": "w", "-..-": "x",
+//            "-.--": "y", "--..": "z"
+//        ]
+//
+//    return letter.components(separatedBy: " ").map { morse[$0] ?? "" }.reduce("", +)
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 구슬을 나누는 경우의 수 (reduce *) = (팩토리얼)
+// 머쓱이는 구슬을 친구들에게 나누어주려고 합니다. 구슬은 모두 다르게 생겼습니다. 머쓱이가 갖고 있는 구슬의 개수 balls와 친구들에게 나누어 줄 구슬 개수 share이 매개변수로 주어질 때, balls개의 구슬 중 share개의 구슬을 고르는 가능한 모든 경우의 수를 return 하는 solution 함수를 완성해주세요.
+
+//func solution(_ balls:Int, _ share:Int) -> Int {
+//    guard balls != share else { return 1 } // 분모가 0이 되는 경우 방지
+//
+//    func fac(_ n: Int) -> Double {
+//        return Double((1...n).reduce(1.0){ Double($0) * Double($1) })
+//    }
+//
+//    return Int(round(fac(balls) / fac(share) / fac(balls-share)))
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 합성수 찾기 (filter 안에 filter)
+// 약수의 개수가 세 개 이상인 수를 합성수라고 합니다. 자연수 n이 매개변수로 주어질 때 n이하의 합성수의 개수를 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ n:Int) -> Int {
+//    var cnt = 0
+//    for i in (1...n) {
+//        if ((1...n).filter { i % $0 == 0 }.count > 2) {cnt += 1}
+//    }
+//    return cnt
+//
+//    // filter 안에 filter
+//    return (1...n).filter { i in (1...i).filter { i % $0 == 0 }.count > 2 }.count
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 인덱스 바꾸기 (swapAt) (String to Array)
+// 문자열 my_string과 정수 num1, num2가 매개변수로 주어질 때, my_string에서 인덱스 num1과 인덱스 num2에 해당하는 문자를 바꾼 문자열을 return 하도록 solution 함수를 완성해보세요.
+
+//func solution(_ my_string:String, _ num1:Int, _ num2:Int) -> String {
+//    var array = ArraySlice(my_string) // String To Array
+//    array.swapAt(num1, num2)
+//    return array.map { String($0) }.joined()
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 배열 회전시키기 (배열 insert, remove, append)
+// 정수가 담긴 배열 numbers와 문자열 direction가 매개변수로 주어집니다. 배열 numbers의 원소를 direction방향으로 한 칸씩 회전시킨 배열을 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ numbers:[Int], _ direction:String) -> [Int] {
+//    var answer = numbers
+//
+//    if direction == "right" {
+//        answer[0] = numbers[numbers.endIndex - 1]
+//        (1...(answer.count-1)).forEach { answer[$0] = numbers[$0-1] }
+//    } else {
+//        answer[answer.endIndex - 1] = numbers[0]
+//        (0...(answer.count-2)).forEach { answer[$0] = numbers[$0+1] }
+//    }
+//
+//    // 한줄 풀이
+//    direction == "right" ? answer.insert(answer.removeLast(), at: 0) : answer.append(answer.removeFirst())
+//
+//    return answer
 //}
