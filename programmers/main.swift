@@ -11,7 +11,7 @@
 import Foundation
 
 //let n = readLine()!.components(separatedBy: [" "]).map { Int($0)! }
-print(solution("hello",1,2))
+print(solution("olleh", "hello"))
 
 // ------------------------------------------------------------------------------------------
 // MARK:  숫자 비교하기 (삼함연산자)
@@ -287,4 +287,40 @@ print(solution("hello",1,2))
 //    direction == "right" ? answer.insert(answer.removeLast(), at: 0) : answer.append(answer.removeFirst())
 //
 //    return answer
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: !!! 옹알이 (replacingOccurrences) !!!
+// 머쓱이는 태어난 지 6개월 된 조카를 돌보고 있습니다. 조카는 아직 "aya", "ye", "woo", "ma" 네 가지 발음을 최대 한 번씩 사용해 조합한(이어 붙인) 발음밖에 하지 못합니다. 문자열 배열 babbling이 매개변수로 주어질 때, 머쓱이의 조카가 발음할 수 있는 단어의 개수를 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ babbling:[String]) -> Int {
+//
+//    let wordList = ["aya", "ye", "woo", "ma"]
+//
+//    return babbling.compactMap { word -> String in
+//        var replacedWord = word
+//
+//        wordList.forEach {
+//            replacedWord = replacedWord.replacingOccurrences(of: $0, with: "9")
+//        }
+//
+//        return replacedWord
+//    }.compactMap {Int($0)}.count
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: !!! 평행 !!!
+// 점 네 개의 좌표를 담은 이차원 배열  dots가 다음과 같이 매개변수로 주어집니다. [[x1, y1], [x2, y2], [x3, y3], [x4, y4]] 주어진 네 개의 점을 두 개씩 이었을 때, 두 직선이 평행이 되는 경우가 있으면 1을 없으면 0을 return 하도록 solution 함수를 완성해보세요.
+
+//func solution(_ dots:[[Int]]) -> Int {
+//    var aList: [Double] = []
+//
+//    for (index,dot) in dots.enumerated() {
+//        for i in (index+1..<dots.count) {
+//            let x = Double(dot.first! - dots[i].first!)
+//            let y = Double(dot.last! - dots[i].last!)
+//            aList.append(x/y)
+//        }
+//    }
+//    return aList.count == Set(aList).count ? 0 : 1
 //}
