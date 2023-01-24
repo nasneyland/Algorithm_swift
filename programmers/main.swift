@@ -11,10 +11,10 @@
 import Foundation
 
 //let n = readLine()!.components(separatedBy: [" "]).map { Int($0)! }
-print(solution("olleh", "hello"))
+print(solution("10", "11"))
 
 // ------------------------------------------------------------------------------------------
-// MARK:  숫자 비교하기 (삼함연산자)
+// MARK: !!! 숫자 비교하기 (삼함연산자) !!!
 // 정수 num1과 num2가 매개변수로 주어집니다. 두 수가 같으면 1 다르면 -1을 retrun하도록 solution 함수를 완성해주세요.
 
 
@@ -23,9 +23,10 @@ print(solution("olleh", "hello"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK:  분수의 덧셈 (for문 -> filter 사용)
+// MARK: !!! 분수의 덧셈 (for문 -> filter 사용) !!!
 // 첫 번째 분수의 분자와 분모를 뜻하는 denum1, num1, 두 번째 분수의 분자와 분모를 뜻하는 denum2, num2가 매개변수로 주어집니다. 두 분수를 더한 값을 기약 분수로 나타냈을 때 분자와 분모를 순서대로 담은 배열을 return 하도록 solution 함수를 완성해보세요.
 
+//// 1차시도
 //func solution(_ denum1:Int, _ num1:Int, _ denum2:Int, _ num2:Int) -> [Int] {
 //    let num = num1 * num2
 //    let denum = (denum1 * num2) + (denum2 * num1)
@@ -43,8 +44,16 @@ print(solution("olleh", "hello"))
 //    return [denum/maximum, num/maximum]
 //}
 
+//// 2차시도
+//func solution(_ numer1:Int, _ denom1:Int, _ numer2:Int, _ denom2:Int) -> [Int] {
+//    let number = (numer1*denom2)+(numer2*denom1)
+//    let denom = denom1*denom2
+//    let max = (1...min(number,denom)).filter {number % $0 == 0 && denom % $0 == 0}.max()!
+//    return [number / max, denom / max]
+//}
+
 // ------------------------------------------------------------------------------------------
-// MARK:  배열 두배 만들기 (map 함수)
+// MARK: !!! 배열 두배 만들기 (map 함수) !!!
 // 정수 배열 numbers가 매개변수로 주어집니다. numbers의 각 원소에 두배한 원소를 가진 배열을 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ numbers:[Int]) -> [Int] {
@@ -61,7 +70,7 @@ print(solution("olleh", "hello"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK:  짝수의 합 (filter & reduce-int)
+// MARK: !!! 짝수의 합 (filter & reduce-int) !!!
 // 정수 n이 주어질 때, n이하의 짝수를 모두 더한 값을 return 하도록 solution 함수를 작성해주세요.
 
 //func solution(_ n:Int) -> Int {
@@ -84,27 +93,24 @@ print(solution("olleh", "hello"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 짝수는 싫어요 (filter)
+// MARK: !!! 짝수는 싫어요 (filter) !!!
 // 정수 n이 매개변수로 주어질 때, n 이하의 홀수가 오름차순으로 담긴 배열을 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ n:Int) -> [Int] {
-////    var answer: [Int] = []
-////    (1...n).forEach{ if $0 % 2 != 0 { answer.append($0) } }
-//
-//    // filter로 배열 바로 필터링하기
-//    return (1...n).filter { $0 % 2 != 0 }
+//    return (1...n).filter{$0 % 2 != 0}.sorted(by: <)
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 피자 나눠 먹기 (2) (filter)
+// MARK: !!! 피자 나눠 먹기 (2) (filter) !!!
 // 머쓱이네 피자가게는 피자를 여섯 조각으로 잘라 줍니다. 피자를 나눠먹을 사람의 수 n이 매개변수로 주어질 때, n명이 주문한 피자를 남기지 않고 모두 같은 수의 피자 조각을 먹어야 한다면 최소 몇 판을 시켜야 하는지를 return 하도록 solution 함수를 완성해보세요.
 
 //func solution(_ n:Int) -> Int {
 //    return (1...n).filter{ (6 * $0) % n == 0 }[0]
+//    return (1...n).filter {($0 * 6) % n == 0}.min()!
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 배열의 평균값 (reduce-int)
+// MARK: !!! 배열의 평균값 (reduce-int) !!!
 // 정수 배열 numbers가 매개변수로 주어집니다. numbers의 원소의 평균값을 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ numbers:[Int]) -> Double {
@@ -120,7 +126,7 @@ print(solution("olleh", "hello"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 점의 위치 구하기 (switch문)
+// MARK: !!! 점의 위치 구하기 (switch문) !!!
 // 사분면은 한 평면을 x축과 y축을 기준으로 나눈 네 부분입니다. 사분면은 아래와 같이 1부터 4까지 번호를매깁니다.
 
 //func solution(_ dot:[Int]) -> Int {
@@ -137,9 +143,10 @@ print(solution("olleh", "hello"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 삼각형의 완성조건 (1) (sorted / popLast)
+// MARK: !!! 삼각형의 완성조건 (1) (sorted / popLast) !!!
 // 선분 세 개로 삼각형을 만들기 위해서는 다음과 같은 조건을 만족해야 합니다. 가장 긴 변의 길이는 다른 두 변의 길이의 합보다 작아야 합니다. 삼각형의 세 변의 길이가 담긴 배열 sides이 매개변수로 주어집니다. 세 변으로 삼각형을 만들 수 있다면 1, 만들 수 없다면 2를 return하도록 solution 함수를 완성해주세요.
 
+//// 첫번째 풀이
 //func solution(_ sides:[Int]) -> Int {
 //    let sortedSides = sides.sorted(by: >)
 //    return sortedSides[0] < sortedSides[1] + sortedSides[2] ? 1 : 2
@@ -150,19 +157,22 @@ print(solution("olleh", "hello"))
 //    return maxEdge < otherEdges ? 1 : 2
 //}
 
+//// 두번째 풀이
+//func solution(_ sides:[Int]) -> Int {
+//    return sides.reduce(0,+) - (2 * sides.max()!) > 0 ? 1 : 2
+//}
+
 // ------------------------------------------------------------------------------------------
 // MARK: 제곱수 판별하기 (sqrt - 제곱근 구하는 함수) (pow - 제곱)
 // 어떤 자연수를 제곱했을 때 나오는 정수를 제곱수라고 합니다. 정수 n이 매개변수로 주어질 때, n이 제곱수라면 1을 아니라면 2를 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ n:Int) -> Int {
 ////    return (2..<n).filter { $0 * $0 == n }.count >= 1 ? 1 : 2
-//
-//    // sqrt 함수 사용하기 - Double 형만 허용한다.
 //    return sqrt(Double(n)) == floor(sqrt(Double(n))) ? 1 : 2
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 자릿수 더하기 (character to int)
+// MARK: !!! 자릿수 더하기 (character to int) !!!
 // 정수 n이 매개변수로 주어질 때 n의 각 자리 숫자의 합을 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ n:Int) -> Int {
@@ -178,7 +188,7 @@ print(solution("olleh", "hello"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 외계행성의 나이 (string-index)
+// MARK: !!! 외계행성의 나이 (string-index) !!!
 // 우주여행을 하던 머쓱이는 엔진 고장으로 PROGRAMMERS-962 행성에 불시착하게 됐습니다. 입국심사에서 나이를 말해야 하는데, PROGRAMMERS-962 행성에서는 나이를 알파벳으로 말하고 있습니다. a는 0, b는 1, c는 2, ..., j는 9입니다. 예를 들어 23살은 cd, 51살은 fb로 표현합니다. 나이 age가 매개변수로 주어질 때 PROGRAMMER-962식 나이를 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ age:Int) -> String {
@@ -187,7 +197,7 @@ print(solution("olleh", "hello"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 숨어있는 숫자의 덧셈 (1) (compactMap / isNumber)
+// MARK: !!! 숨어있는 숫자의 덧셈 (1) (compactMap / isNumber) !!!
 // 문자열 my_string이 매개변수로 주어집니다. my_string안의 모든 자연수들의 합을 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ my_string:String) -> Int {
@@ -206,7 +216,7 @@ print(solution("olleh", "hello"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 모스부호 (1) (string-index, 배열-index) (딕셔너리) (reduce-string)
+// MARK: !!! 모스부호 (1) (string-index, 배열-index) (딕셔너리) (reduce-string) !!!
 // 머쓱이는 친구에게 모스부호를 이용한 편지를 받았습니다. 그냥은 읽을 수 없어 이를 해독하는 프로그램을 만들려고 합니다. 문자열 letter가 매개변수로 주어질 때, letter를 영어 소문자로 바꾼 문자열을 return 하도록 solution 함수를 완성해보세요.
 
 //func solution(_ letter:String) -> String {
@@ -227,6 +237,7 @@ print(solution("olleh", "hello"))
 //        ]
 //
 //    return letter.components(separatedBy: " ").map { morse[$0] ?? "" }.reduce("", +)
+//    return letter.split(separator: " ").map {morses[String($0),default:""]}.joined()
 //}
 
 // ------------------------------------------------------------------------------------------
@@ -309,7 +320,7 @@ print(solution("olleh", "hello"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: !!! 평행 !!!
+// MARK: !!! 평행 (배열의 조합 - 모든 경우의 수) !!!
 // 점 네 개의 좌표를 담은 이차원 배열  dots가 다음과 같이 매개변수로 주어집니다. [[x1, y1], [x2, y2], [x3, y3], [x4, y4]] 주어진 네 개의 점을 두 개씩 이었을 때, 두 직선이 평행이 되는 경우가 있으면 1을 없으면 0을 return 하도록 solution 함수를 완성해보세요.
 
 //func solution(_ dots:[[Int]]) -> Int {
@@ -324,3 +335,82 @@ print(solution("olleh", "hello"))
 //    }
 //    return aList.count == Set(aList).count ? 0 : 1
 //}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 겹치는 선분의 길이 (딕셔너리)
+// 선분 3개가 평행하게 놓여 있습니다. 세 선분의 시작과 끝 좌표가 [[start, end], [start, end], [start, end]] 형태로 들어있는 2차원 배열 lines가 매개변수로 주어질 때, 두 개 이상의 선분이 겹치는 부분의 길이를 return 하도록 solution 함수를 완성해보세요.
+
+//func solution(_ lines:[[Int]]) -> Int {
+//    // 중복도 모두 카운트하는 경우이다 !!
+//    var cnt = 0
+//    for (index, line) in lines.enumerated() {
+//        for i in (index+1..<lines.count) {
+//            var dots: [Int] = line + lines[i]
+//            dots = dots.sorted(by: <)
+//            let total = dots.last! - dots.first!
+//            let alone = abs(line.first! - lines[i].first!) + abs(line.last! - lines[i].last!)
+//            cnt += total - alone
+//        }
+//    }
+//    return cnt
+    
+//    // 고차함수로 푼 풀이
+//    var dictionary: [Int: Int] = [:]
+//
+//    lines.map { ($0[0]..<$0[1]).map { $0 } }.forEach { i in
+//        i.forEach { dictionary.keys.contains($0) ? dictionary.updateValue(dictionary[$0]! + 1, forKey: $0) : dictionary.updateValue(1, forKey: $0) }
+//    }
+//    return dictionary.filter { $0.value > 1 }.count
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: !!! 안전지대 (2차원 배열) !!!
+// 지뢰는 2차원 배열 board에 1로 표시되어 있고 board에는 지뢰가 매설 된 지역 1과, 지뢰가 없는 지역 0만 존재합니다. 지뢰가 매설된 지역의 지도 board가 매개변수로 주어질 때, 안전한 지역의 칸 수를 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ board:[[Int]]) -> Int {
+//    var score = board
+//
+//    for (rIndex,row) in board.enumerated() {
+//        for (cIndex,column) in row.enumerated() {
+//            if column == 1 {
+//                (rIndex-1...rIndex+1).forEach { r in
+//                    (cIndex-1...cIndex+1).forEach { c in
+//                        if r >= 0 && c >= 0 && r < board.count && c < board.count {
+//                            score[r][c] += 1
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+//    return score.flatMap {$0}.filter {$0 == 0}.count
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: !!! 유한소수 판별하기 (분수, 소인수분해, 약수) !!!
+// 소수점 아래 숫자가 계속되지 않고 유한개인 소수를 유한소수라고 합니다. 분수를 소수로 고칠 때 유한소수로 나타낼 수 있는 분수인지 판별하려고 합니다. 유한소수가 되기 위한 분수의 조건은 다음과 같습니다. 기약분수로 나타내었을 때, 분모의 소인수가 2와 5만 존재해야 합니다. 두 정수 a와 b가 매개변수로 주어질 때, a/b가 유한소수이면 1을, 무한소수라면 2를 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ a:Int, _ b:Int) -> Int {
+//    // 1. 기약분수 나타내기
+//    let fraction = b / (1...a).filter{a % $0 == 0 && b % $0 == 0}.max()!
+//    // 2. 분모의 소인수 구하기
+//    let divisionList = (1...fraction).filter {fraction % $0 == 0}
+//    let canDivisionList = divisionList.filter {$0 % 2 == 0 || $0 % 5 == 0}
+//
+//    return divisionList.count - 1 == canDivisionList.count ? 1 : 2
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 특이한 정렬 (2차원 배열의 정렬, 우선순위정렬, 다중정렬, 튜플)
+// 정수 n을 기준으로 n과 가까운 수부터 정렬하려고 합니다. 이때 n으로부터의 거리가 같다면 더 큰 수를 앞에 오도록 배치합니다. 정수가 담긴 배열 numlist와 정수 n이 주어질 때 numlist의 원소를 n으로부터 가까운 순서대로 정렬한 배열을 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ numlist:[Int], _ n:Int) -> [Int] {
+//    return numlist.map {[abs(n-$0),$0]}.sorted{$0[1] > $1[1]}.sorted{$0[0] < $1[0]}.map{$0[1]}
+//
+//    // 간단풀이
+//    return numlist.sorted(by: { (abs($0 - n), -$0) < (abs($1 - n), -$1) })
+//}
+
+func solution(_ bin1:String, _ bin2:String) -> String {
+    for b in (bin1, bin2
+}
