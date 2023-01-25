@@ -11,7 +11,7 @@
 import Foundation
 
 //let n = readLine()!.components(separatedBy: [" "]).map { Int($0)! }
-print(solution("10", "11"))
+print(solution("10 Z 20 Z 1"))
 
 // ------------------------------------------------------------------------------------------
 // MARK: !!! 숫자 비교하기 (삼함연산자) !!!
@@ -78,7 +78,7 @@ print(solution("10", "11"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK:  최빈값 구하기 (딕셔너리 정렬)
+// MARK: !!! 최빈값 구하기 (딕셔너리 정렬) !!!
 // 정수 n이 주어질 때, n이하의 짝수를 모두 더한 값을 return 하도록 solution 함수를 작성해주세요.
 
 //func solution(_ array:[Int]) -> Int {
@@ -118,7 +118,7 @@ print(solution("10", "11"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 문자 반복 출력하기 (String-repeat / map 함수)
+// MARK: !!! 문자 반복 출력하기 (String-repeat / map 함수) !!!
 // 문자열 my_string과 정수 n이 매개변수로 주어질 때, my_string에 들어있는 각 문자를 n만큼 반복한 문자열을 return 하도록 solution 함수를 완성해보세요.
 
 //func solution(_ my_string:String, _ n:Int) -> String {
@@ -163,7 +163,7 @@ print(solution("10", "11"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 제곱수 판별하기 (sqrt - 제곱근 구하는 함수) (pow - 제곱)
+// MARK: !!! 제곱수 판별하기 (sqrt - 제곱근 구하는 함수) (pow - 제곱) !!!
 // 어떤 자연수를 제곱했을 때 나오는 정수를 제곱수라고 합니다. 정수 n이 매개변수로 주어질 때, n이 제곱수라면 1을 아니라면 2를 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ n:Int) -> Int {
@@ -241,7 +241,7 @@ print(solution("10", "11"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 구슬을 나누는 경우의 수 (reduce *) = (팩토리얼)
+// MARK: !!! 구슬을 나누는 경우의 수 (reduce *) = (팩토리얼) !!!
 // 머쓱이는 구슬을 친구들에게 나누어주려고 합니다. 구슬은 모두 다르게 생겼습니다. 머쓱이가 갖고 있는 구슬의 개수 balls와 친구들에게 나누어 줄 구슬 개수 share이 매개변수로 주어질 때, balls개의 구슬 중 share개의 구슬을 고르는 가능한 모든 경우의 수를 return 하는 solution 함수를 완성해주세요.
 
 //func solution(_ balls:Int, _ share:Int) -> Int {
@@ -252,10 +252,12 @@ print(solution("10", "11"))
 //    }
 //
 //    return Int(round(fac(balls) / fac(share) / fac(balls-share)))
+//
+//    return Int(round(((balls - share + 1)...balls).reduce(1,*) / (1...share).reduce(1,*))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 합성수 찾기 (filter 안에 filter)
+// MARK: !!! 합성수 찾기 (filter 안에 filter) !!!
 // 약수의 개수가 세 개 이상인 수를 합성수라고 합니다. 자연수 n이 매개변수로 주어질 때 n이하의 합성수의 개수를 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ n:Int) -> Int {
@@ -270,17 +272,17 @@ print(solution("10", "11"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 인덱스 바꾸기 (swapAt) (String to Array)
+// MARK: !!! 인덱스 바꾸기 (swapAt) (String to Array) !!!
 // 문자열 my_string과 정수 num1, num2가 매개변수로 주어질 때, my_string에서 인덱스 num1과 인덱스 num2에 해당하는 문자를 바꾼 문자열을 return 하도록 solution 함수를 완성해보세요.
 
 //func solution(_ my_string:String, _ num1:Int, _ num2:Int) -> String {
-//    var array = ArraySlice(my_string) // String To Array
-//    array.swapAt(num1, num2)
+//    var array = ArraySlice(my_string)
+//    array.swapAt(num1, num2) // 단독으로 써야된다
 //    return array.map { String($0) }.joined()
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 배열 회전시키기 (배열 insert, remove, append)
+// MARK: !!! 배열 회전시키기 (배열 insert, remove, append) !!!
 // 정수가 담긴 배열 numbers와 문자열 direction가 매개변수로 주어집니다. 배열 numbers의 원소를 direction방향으로 한 칸씩 회전시킨 배열을 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ numbers:[Int], _ direction:String) -> [Int] {
@@ -337,7 +339,7 @@ print(solution("10", "11"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 겹치는 선분의 길이 (딕셔너리)
+// MARK: !!! 겹치는 선분의 길이 (딕셔너리) !!!
 // 선분 3개가 평행하게 놓여 있습니다. 세 선분의 시작과 끝 좌표가 [[start, end], [start, end], [start, end]] 형태로 들어있는 2차원 배열 lines가 매개변수로 주어질 때, 두 개 이상의 선분이 겹치는 부분의 길이를 return 하도록 solution 함수를 완성해보세요.
 
 //func solution(_ lines:[[Int]]) -> Int {
@@ -401,7 +403,7 @@ print(solution("10", "11"))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 특이한 정렬 (2차원 배열의 정렬, 우선순위정렬, 다중정렬, 튜플)
+// MARK: !!! 특이한 정렬 (2차원 배열의 정렬, 우선순위정렬, 다중정렬, 튜플) !!!
 // 정수 n을 기준으로 n과 가까운 수부터 정렬하려고 합니다. 이때 n으로부터의 거리가 같다면 더 큰 수를 앞에 오도록 배치합니다. 정수가 담긴 배열 numlist와 정수 n이 주어질 때 numlist의 원소를 n으로부터 가까운 순서대로 정렬한 배열을 return하도록 solution 함수를 완성해주세요.
 
 //func solution(_ numlist:[Int], _ n:Int) -> [Int] {
@@ -411,6 +413,76 @@ print(solution("10", "11"))
 //    return numlist.sorted(by: { (abs($0 - n), -$0) < (abs($1 - n), -$1) })
 //}
 
-func solution(_ bin1:String, _ bin2:String) -> String {
-    for b in (bin1, bin2
-}
+// ------------------------------------------------------------------------------------------
+// MARK: !!! 소인수분해 !!!
+// 소인수분해란 어떤 수를 소수들의 곱으로 표현하는 것입니다. 예를 들어 12를 소인수 분해하면 2 * 2 * 3 으로 나타낼 수 있습니다. 따라서 12의 소인수는 2와 3입니다. 자연수 n이 매개변수로 주어질 때 n의 소인수를 오름차순으로 담은 배열을 return하도록 solution 함수를 완성해주세요.
+
+//func solution(_ n:Int) -> [Int] {
+//    var number = n
+//    var division = 2
+//    var numList: [Int] = []
+//
+//    while number != 1 {
+//        if number % division == 0 {
+//            numList.append(division)
+//
+//            while number % division == 0 {
+//                number = number / division
+//            }
+//        }
+//        division += 1
+//    }
+//
+//    return numList
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: !!! 문자열 계산하기 !!!
+// my_string은 "3 + 5"처럼 문자열로 된 수식입니다. 문자열 my_string이 매개변수로 주어질 때, 수식을 계산한 값을 return 하는 solution 함수를 완성해주세요.
+
+//func solution(_ my_string:String) -> Int {
+//
+//    return my_string.components(separatedBy: " + ").map { number -> Int in
+//            if number.count == 1 {
+//                return Int(number)!
+//            } else {
+//                var numList = number.components(separatedBy: " - ").map{Int($0)!}
+//                return numList[0] + numList[1...].reduce(0,-)
+//            }
+//        }.reduce(0,+)
+//
+//    return my_string.replacingOccurrences(of: "- ", with: "-")
+//            .replacingOccurrences(of: "+", with: "")
+//            .split(separator: " ")
+//            .map { Int($0)! }
+//            .reduce(0, +))
+//
+//    let changedForm = my_string.replacingOccurrences(of: " - ", with: " + -")
+//    return changedForm.components(separatedBy: " + ").reduce(0) { $0 + Int($1)! }
+//    return 0
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: !!! 컨트롤 제트 !!!
+// 숫자와 "Z"가 공백으로 구분되어 담긴 문자열이 주어집니다. 문자열에 있는 숫자를 차례대로 더하려고 합니다. 이 때 "Z"가 나오면 바로 전에 더했던 숫자를 뺀다는 뜻입니다. 숫자와 "Z"로 이루어진 문자열 s가 주어질 때, 머쓱이가 구한 값을 return 하도록 solution 함수를 완성해보세요.
+
+//func solution(_ s:String) -> Int {
+//    var strArray = s.split(separator: " ")
+//    while strArray.contains("Z") {
+//        let zIndex = strArray.firstIndex(of: "Z")!
+//        strArray.remove(at: zIndex)
+//        strArray.remove(at: strArray.index(before: zIndex))
+//    }
+//    return strArray.map{Int($0)!}.reduce(0,+)
+//
+//    // 스택으로 풀기
+//    var stack = [Int]()
+//    for w in s.components(separatedBy: [" "]) {
+//        if w == "Z" {
+//            stack.popLast()
+//        } else {
+//            stack.append(Int(w)!)
+//        }
+//    }
+//    return stack.reduce(0, +)
+//}
