@@ -11,6 +11,7 @@
 		FDBB9992295472F40096DC08 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBB9991295472F40096DC08 /* main.swift */; };
 		FDBB999D295C5A980096DC08 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBB999C295C5A980096DC08 /* main.swift */; };
 		FDBB99A829659A140096DC08 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBB99A729659A140096DC08 /* main.swift */; };
+		FDBB99B3297ABB090096DC08 /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = FDBB99B2297ABB090096DC08 /* main.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -50,6 +51,15 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
+		FDBB99AE297ABB090096DC08 /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
@@ -61,6 +71,8 @@
 		FDBB999C295C5A980096DC08 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 		FDBB99A529659A140096DC08 /* kakao */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = kakao; sourceTree = BUILT_PRODUCTS_DIR; };
 		FDBB99A729659A140096DC08 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
+		FDBB99B0297ABB090096DC08 /* baekjoon */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = baekjoon; sourceTree = BUILT_PRODUCTS_DIR; };
+		FDBB99B2297ABB090096DC08 /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -92,6 +104,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		FDBB99AD297ABB090096DC08 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -100,6 +119,7 @@
 			children = (
 				FDBB9980295459520096DC08 /* cote */,
 				FDBB9990295472F40096DC08 /* programmers */,
+				FDBB99B1297ABB090096DC08 /* baekjoon */,
 				FDBB999B295C5A980096DC08 /* programmers_kit */,
 				FDBB99A629659A140096DC08 /* kakao */,
 				FDBB997F295459520096DC08 /* Products */,
@@ -113,6 +133,7 @@
 				FDBB998F295472F40096DC08 /* programmers */,
 				FDBB999A295C5A980096DC08 /* programmers_kit */,
 				FDBB99A529659A140096DC08 /* kakao */,
+				FDBB99B0297ABB090096DC08 /* baekjoon */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -147,6 +168,14 @@
 				FDBB99A729659A140096DC08 /* main.swift */,
 			);
 			path = kakao;
+			sourceTree = "<group>";
+		};
+		FDBB99B1297ABB090096DC08 /* baekjoon */ = {
+			isa = PBXGroup;
+			children = (
+				FDBB99B2297ABB090096DC08 /* main.swift */,
+			);
+			path = baekjoon;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -220,6 +249,23 @@
 			productReference = FDBB99A529659A140096DC08 /* kakao */;
 			productType = "com.apple.product-type.tool";
 		};
+		FDBB99AF297ABB090096DC08 /* baekjoon */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = FDBB99B4297ABB090096DC08 /* Build configuration list for PBXNativeTarget "baekjoon" */;
+			buildPhases = (
+				FDBB99AC297ABB090096DC08 /* Sources */,
+				FDBB99AD297ABB090096DC08 /* Frameworks */,
+				FDBB99AE297ABB090096DC08 /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = baekjoon;
+			productName = baekjoon;
+			productReference = FDBB99B0297ABB090096DC08 /* baekjoon */;
+			productType = "com.apple.product-type.tool";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -242,6 +288,9 @@
 					FDBB99A429659A140096DC08 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
+					FDBB99AF297ABB090096DC08 = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
 				};
 			};
 			buildConfigurationList = FDBB9979295459520096DC08 /* Build configuration list for PBXProject "cote" */;
@@ -261,6 +310,7 @@
 				FDBB998E295472F40096DC08 /* programmers */,
 				FDBB9999295C5A980096DC08 /* programmers_kit */,
 				FDBB99A429659A140096DC08 /* kakao */,
+				FDBB99AF297ABB090096DC08 /* baekjoon */,
 			);
 		};
 /* End PBXProject section */
@@ -295,6 +345,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				FDBB99A829659A140096DC08 /* main.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		FDBB99AC297ABB090096DC08 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				FDBB99B3297ABB090096DC08 /* main.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -504,6 +562,28 @@
 			};
 			name = Release;
 		};
+		FDBB99B5297ABB090096DC08 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7JCB3TJ6U7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		FDBB99B6297ABB090096DC08 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 7JCB3TJ6U7;
+				ENABLE_HARDENED_RUNTIME = YES;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -548,6 +628,15 @@
 			buildConfigurations = (
 				FDBB99AA29659A140096DC08 /* Debug */,
 				FDBB99AB29659A140096DC08 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		FDBB99B4297ABB090096DC08 /* Build configuration list for PBXNativeTarget "baekjoon" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				FDBB99B5297ABB090096DC08 /* Debug */,
+				FDBB99B6297ABB090096DC08 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
