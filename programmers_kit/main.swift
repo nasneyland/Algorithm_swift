@@ -10,7 +10,78 @@
 
 import Foundation
 
-print(solution(5, [2], [1,3,5]))
+print(solution(["classic", "pop", "classic", "classic", "pop"], [500, 600, 150, 800, 2500]))
+
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+// MARK: - 해시
+// Key-value쌍으로 데이터를 빠르게 찾아보세요. 딕셔너리를 이용하자.
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------
+// MARK: 위장 (Lv.1) (딕셔너리)
+// 스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다. 예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면 다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.
+
+//func solution(_ clothes:[[String]]) -> Int {
+//    var type: [String: Int] = [:]
+//    clothes.forEach {type[$0[1], default:1] += 1}
+//    return type.values.reduce(1,*) - 1
+//}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 베스트앨범 (Lv.2) (딕셔너리)
+// 스트리밍 사이트에서 장르 별로 가장 많이 재생된 노래를 두 개씩 모아 베스트 앨범을 출시하려 합니다. 노래는 고유 번호로 구분하며, 노래를 수록하는 기준은 다음과 같습니다. 1)속한 노래가 많이 재생된 장르를 먼저 수록합니다. 2)장르 내에서 많이 재생된 노래를 먼저 수록합니다. 3)장르 내에서 재생 횟수가 같은 노래 중에서는 고유 번호가 낮은 노래를 먼저 수록합니다. 노래의 장르를 나타내는 문자열 배열 genres와 노래별 재생 횟수를 나타내는 정수 배열 plays가 주어질 때, 베스트 앨범에 들어갈 노래의 고유 번호를 순서대로 return 하도록 solution 함수를 완성하세요.
+
+//func solution(_ genres:[String], _ plays:[Int]) -> [Int] {
+//    var playsDic: [Int: (String, Int)] = [:]
+//    var genresDic: [String: Int] = [:]
+//
+//    // 장르와 곡 딕셔너리 선언
+//    (0...genres.count-1).forEach {
+//        genresDic[genres[$0], default: 0] += plays[$0]
+//        playsDic[$0] = (genres[$0], plays[$0])
+//    }
+//
+//    // 장르와 곡 정렬
+//    let sortedGenres = genresDic.sorted {$0.1 > $1.1}
+//    let sortedPlays = playsDic.sorted {($0.1.1, -$0.0) > ($1.1.1, -$1.0)}
+//
+//    var result: [Int] = []
+//    for (i, genre) in sortedGenres.enumerated() {
+//        for song in sortedPlays {
+//            if result.count != (i+1) * 2 {
+//                if song.value.0 == genre.key {
+//                    result.append(song.key)
+//                }
+//            } else {
+//                break
+//            }
+//        }
+//    }
+//
+//    return result
+//}
+
+//func solution(_ genres:[String], _ plays:[Int]) -> [Int] {
+//    var dic =  [String: [[Int]]]()
+//
+//    genres.enumerated().forEach { (index, element) in
+//        if dic[element] == nil {
+//            dic[element] = [[index, plays[index]]]
+//        } else {
+//            dic[element]! += [[index, plays[index]]]
+//        }
+//    }
+//
+//    return Array(dic.values)
+//            .sorted {
+//                ($0.reduce(0) { $0 + $1[1] }) > ($1.reduce(0) { $0 + $1[1] })
+//            }
+//            .flatMap {
+//                $0.sorted { $0[1] > $1[1] }.map { $0[0] }.prefix(2)
+//            }
+//}
 
 // ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
