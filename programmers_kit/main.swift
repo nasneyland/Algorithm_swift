@@ -20,7 +20,7 @@ print(solution(["classic", "pop", "classic", "classic", "pop"], [500, 600, 150, 
 // ------------------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------------
-// MARK: 위장 (Lv.1) (딕셔너리)
+// MARK: 위장 (Lv.2) (딕셔너리)
 // 스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다. 예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면 다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.
 
 //func solution(_ clothes:[[String]]) -> Int {
@@ -64,23 +64,21 @@ print(solution(["classic", "pop", "classic", "classic", "pop"], [500, 600, 150, 
 //}
 
 //func solution(_ genres:[String], _ plays:[Int]) -> [Int] {
-//    var dic =  [String: [[Int]]]()
+//    var dict: [String: [[Int]]] = [:]
 //
-//    genres.enumerated().forEach { (index, element) in
-//        if dic[element] == nil {
-//            dic[element] = [[index, plays[index]]]
-//        } else {
-//            dic[element]! += [[index, plays[index]]]
-//        }
+//    // 딕셔너리로 같은 장르끼리 묶기
+//    genres.enumerated().forEach { (index, genre) in
+//         dict[genre, default: []] += [[index, plays[index]]]
 //    }
 //
-//    return Array(dic.values)
-//            .sorted {
-//                ($0.reduce(0) { $0 + $1[1] }) > ($1.reduce(0) { $0 + $1[1] })
-//            }
-//            .flatMap {
-//                $0.sorted { $0[1] > $1[1] }.map { $0[0] }.prefix(2)
-//            }
+//    // 1. 속한 노래가 많이 재생된 장르 먼저 수록합니다.
+//    // 2. 장르 내에서 많이 재생된 노래를 먼저 수록합니다. (같으면 고유번호 낮은 노래 먼저)
+//    // 3. 상위 2개 노래만 인덱스를 출력합니다
+//    return dict.values.sorted {
+//        $0.reduce(0) {$0 + $1[1]} > $1.reduce(0) {$0 + $1[1]}
+//    }.flatMap {
+//        $0.sorted {(-$0[0],$0[1]) > (-$0[0],$1[1])}
+//        .prefix(2).map{$0[0]}}
 //}
 
 // ------------------------------------------------------------------------------------------
