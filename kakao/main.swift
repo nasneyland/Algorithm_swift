@@ -10,7 +10,7 @@
 
 import Foundation
 
-print(solution(["AN", "CF", "MJ", "RT", "NA"], [5, 3, 2, 7, 5]))
+print(solution(437674, 3))
 
 // ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
@@ -81,10 +81,50 @@ print(solution(["AN", "CF", "MJ", "RT", "NA"], [5, 3, 2, 7, 5]))
 //
 //    return id_list.map { id in
 //        return reportDic[id, default: []].reduce(0) {
-//            $0 + (reported[$1, default: 0] >= k ? 1 : 0)
+//            $0 + (reportedMemberDic[$1, default: 0] >= k ? 1 : 0)
 //        }
 //    }
 //}
+
+// MARK: 2. k진수에서 소수 개수 구하기
+
+//// 첫번째 풀이 : 실행은 되는데 2개에서 시간초과 뜸 (모든 수를 순회하는 것은 너무 비효율적 -> 소수 구하는 로직을 새로 생각해보자)
+//func solution(_ n:Int, _ k:Int) -> Int {
+//    return String(n, radix: k).split(separator: "0").filter { number in
+//        return (2...Int(number)!).filter { Int(number)! % $0 == 0 }.count == 2 ? true : false
+//    }.count
+//}
+
+////두번째 풀이 : 소수를 구할 때 전체를 순회하지 않고 루트값까지만 순회해서 단계를 줄여준다!
+//func solution(_ n:Int, _ k:Int) -> Int {
+//
+//    func isPrime(_ num: Int) -> Bool {
+//        if(num<4) {
+//            return num == 1 || num == 0 ? false : true
+//        }
+//        for i in 2...Int(sqrt(Double(num))) {
+//            print(i)
+//            if (num % i == 0) { return false }
+//        }
+//        return true
+//    }
+//
+//    return String(n, radix: k).split(separator: "0").filter {
+//        return isPrime(Int($0)!)
+//    }.count
+//}
+
+//// 마지막 풀이 : 내 풀이에 제곱근 형태 병합하기
+//func solution(_ n:Int, _ k:Int) -> Int {
+//    return String(n, radix: k).split(separator: "0").filter { number in
+//        let num = Int(number)!
+//        if num < 4 {
+//            return num == 1 || num == 0 ? false : true
+//        }
+//        return (2...Int(sqrt(Double(num)))).filter { num % $0 == 0 }.count == 0
+//    }.count
+//}
+
 // ------------------------------------------------------------------------------------------
 // MARK: !!! 성격 유형 검사하기 (LV.1) (딕셔너리) !!!
 
