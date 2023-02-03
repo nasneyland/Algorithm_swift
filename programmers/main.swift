@@ -11,7 +11,7 @@
 import Foundation
 
 //let n = readLine()!.components(separatedBy: [" "]).map { Int($0)! }
-print(solution("10 Z 20 Z 1"))
+//print(solution("10 Z 20 Z 1"))
 
 // ------------------------------------------------------------------------------------------
 // MARK: !!! 숫자 비교하기 (삼함연산자) !!!
@@ -253,7 +253,12 @@ print(solution("10 Z 20 Z 1"))
 //
 //    return Int(round(fac(balls) / fac(share) / fac(balls-share)))
 //
+//    // 이 식이 에러가 나는 이유 -> Double 형변환 때문이다... Double로 변환한 후 나누기 해줘야 된다.
 //    return Int(round(((balls - share + 1)...balls).reduce(1,*) / (1...share).reduce(1,*))
+//
+//    let ball = Double(((balls - share + 1)...balls).reduce(1) { Double($0) * Double($1) })
+//    let shares = Double((1...share).reduce(1) { Double($0) * Double($1) })
+//    return Int(round( ball / shares ))
 //}
 
 // ------------------------------------------------------------------------------------------
