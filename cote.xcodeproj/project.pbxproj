@@ -118,8 +118,8 @@
 			isa = PBXGroup;
 			children = (
 				FDBB9980295459520096DC08 /* cote */,
-				FDBB9990295472F40096DC08 /* programmers */,
 				FDBB99B1297ABB090096DC08 /* baekjoon */,
+				FDBB9990295472F40096DC08 /* programmers_basic */,
 				FDBB999B295C5A980096DC08 /* programmers_kit */,
 				FDBB99A629659A140096DC08 /* kakao */,
 				FDBB997F295459520096DC08 /* Products */,
@@ -146,12 +146,12 @@
 			path = cote;
 			sourceTree = "<group>";
 		};
-		FDBB9990295472F40096DC08 /* programmers */ = {
+		FDBB9990295472F40096DC08 /* programmers_basic */ = {
 			isa = PBXGroup;
 			children = (
 				FDBB9991295472F40096DC08 /* main.swift */,
 			);
-			path = programmers;
+			path = programmers_basic;
 			sourceTree = "<group>";
 		};
 		FDBB999B295C5A980096DC08 /* programmers_kit */ = {

@@ -123,6 +123,9 @@ let intArray = [1,2,3,4,5,6,7,8,9]
 //print(Array(strArray2.joined(separator: [""])))
 
 // ------------------------------------------------------------------------------------------
+// MARK: - 고급 함수
+
+// ------------------------------------------------------------------------------------------
 // MARK: Dictionary
 
 var dic = ["height" : 65, "age" : 50]
@@ -130,7 +133,48 @@ var dic2: [String: Int] = [:]
 var intDic = [1:1, 5:1, 3:1]
 var sortDict = ["aaa" : 65, "bbb" : 50, "ccc" : 40, "ddd" : 50, "aa" : 50, "cc" : 50]
 
-print(sortDict.sorted {($0.1, $0.0) < ($1.1, $1.0)})
+//print(type(of: sortDict))
+//print(type(of: sortDict.sorted {($0.1, $0.0) < ($1.1, $1.0)}))
 
 //print(intDic)
+
+// ------------------------------------------------------------------------------------------
+// MARK: 소수판별
+
+// 제곱근 이용하는 방식
+func isPrime(_ num: Int) -> Bool {
+    if(num<4) {
+        return num == 1 || num == 0 ? false : true
+    }
+    for i in 2...Int(sqrt(Double(num))) {
+        if (num % i == 0) { return false }
+    }
+    return true
+}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 팩토리얼
+
+func fac(_ n: Int) -> Double {
+    return Double((1...n).reduce(1.0){ Double($0) * Double($1) })
+}
+
+
+// ------------------------------------------------------------------------------------------
+// MARK: 순열
+
+// m개의 공을 원하는 만큼 뽑아서 나열할 수 있는 모든 경우
+func permutation(_ array: [String]) -> Set<String> {
+    if array.count == 0 { return [] }
+
+    let answerArray = (0..<array.count).flatMap { i -> [String] in
+        var removedArray = array
+        let elem = removedArray.remove(at: i)
+        return [elem] + permutation(removedArray).map { elem + $0 }
+    }
+
+    return Set(answerArray)
+}
+
+print(permutation(["a","b","c"]))
 
