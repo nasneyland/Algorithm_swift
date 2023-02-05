@@ -10,8 +10,7 @@
 
 import Foundation
 
-print(solution("1231234", 3))
-//print(solution("477252841", 4))
+print(solution("17"))
 
 // ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
@@ -68,7 +67,7 @@ print(solution("1231234", 3))
 // ------------------------------------------------------------------------------------------
 
 // ------------------------------------------------------------------------------------------
-// MARK: 위장 (Lv.2) (딕셔너리)
+// MARK: 위장 (Lv.2)
 // 스파이들은 매일 다른 옷을 조합하여 입어 자신을 위장합니다. 예를 들어 스파이가 가진 옷이 아래와 같고 오늘 스파이가 동그란 안경, 긴 코트, 파란색 티셔츠를 입었다면 다음날은 청바지를 추가로 입거나 동그란 안경 대신 검정 선글라스를 착용하거나 해야 합니다.
 
 //func solution(_ clothes:[[String]]) -> Int {
@@ -78,7 +77,7 @@ print(solution("1231234", 3))
 //}
 
 // ------------------------------------------------------------------------------------------
-// MARK: 베스트앨범 (Lv.2) (딕셔너리) (2차원 고차함수 이용하기)
+// MARK: 베스트앨범 (Lv.2) (2차원 고차함수 이용하기)
 // 스트리밍 사이트에서 장르 별로 가장 많이 재생된 노래를 두 개씩 모아 베스트 앨범을 출시하려 합니다. 노래는 고유 번호로 구분하며, 노래를 수록하는 기준은 다음과 같습니다. 1)속한 노래가 많이 재생된 장르를 먼저 수록합니다. 2)장르 내에서 많이 재생된 노래를 먼저 수록합니다. 3)장르 내에서 재생 횟수가 같은 노래 중에서는 고유 번호가 낮은 노래를 먼저 수록합니다. 노래의 장르를 나타내는 문자열 배열 genres와 노래별 재생 횟수를 나타내는 정수 배열 plays가 주어질 때, 베스트 앨범에 들어갈 노래의 고유 번호를 순서대로 return 하도록 solution 함수를 완성하세요.
 
 //func solution(_ genres:[String], _ plays:[Int]) -> [Int] {
@@ -128,6 +127,99 @@ print(solution("1231234", 3))
 //        $0.sorted {(-$0[0],$0[1]) > (-$0[0],$1[1])}
 //        .prefix(2).map{$0[0]}}
 //}
+
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+// MARK: - 완전탐색 -> 순열/조합/경우의수
+// 무식해 보여도 사실은 최고의 방법일 때가 있지요. 가능한 모든 상황을 조사해 문제를 풀어보세요.
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+
+// ------------------------------------------------------------------------------------------
+// MARK: 최소직사각형 (Lv.1)
+// 명함 지갑을 만드는 회사에서 지갑의 크기를 정하려고 합니다. 다양한 모양과 크기의 명함들을 모두 수납할 수 있으면서, 작아서 들고 다니기 편한 지갑을 만들어야 합니다. 이러한 요건을 만족하는 지갑을 만들기 위해 디자인팀은 모든 명함의 가로 길이와 세로 길이를 조사했습니다.
+
+//func solution(_ sizes:[[Int]]) -> Int {
+//    var square = [0, 0]
+//    sizes.forEach {
+//        let size = $0.sorted(by: >)
+//        square[0] = max(square[0], size[0])
+//        square[1] = max(square[1], size[1])
+//    }
+//    return square[0] * square[1]
+//}
+
+// MARK: 모의고사 (Lv.1)
+// 수포자는 수학을 포기한 사람의 준말입니다. 수포자 삼인방은 모의고사에 수학 문제를 전부 찍으려 합니다. 수포자는 1번 문제부터 마지막 문제까지 다음과 같이 찍습니다.
+// 1번 수포자가 찍는 방식: 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, ...
+// 2번 수포자가 찍는 방식: 2, 1, 2, 3, 2, 4, 2, 5, 2, 1, 2, 3, 2, 4, 2, 5, ...
+// 3번 수포자가 찍는 방식: 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, 3, 3, 1, 1, 2, 2, 4, 4, 5, 5, ...
+// 1번 문제부터 마지막 문제까지의 정답이 순서대로 들은 배열 answers가 주어졌을 때, 가장 많은 문제를 맞힌 사람이 누구인지 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+
+//func solution(_ answers:[Int]) -> [Int] {
+//
+//    let mathArray = [[1,2,3,4,5], [2,1,2,3,2,4,2,5], [3,3,1,1,2,2,4,4,5,5]]
+//    var scoreArray = [1:0,2:0,3:0]
+//
+//    answers.enumerated().forEach { (index,answer) in
+//        (0...2).forEach {
+//            scoreArray[$0+1]! += mathArray[$0][index % mathArray[$0].count] == answers[index] ? 1 : 0
+//        }
+//    }
+//
+//    return scoreArray.filter { $0.1 == scoreArray.values.max() }.map {$0.key}.sorted()
+//}
+
+// MARK: 소수찾기 (Lv.2)
+// 한자리 숫자가 적힌 종이 조각이 흩어져있습니다. 흩어진 종이 조각을 붙여 소수를 몇 개 만들 수 있는지 알아내려 합니다. 각 종이 조각에 적힌 숫자가 적힌 문자열 numbers가 주어졌을 때, 종이 조각으로 만들 수 있는 소수가 몇 개인지 return 하도록 solution 함수를 완성해주세요.
+
+//func solution(_ numbers:String) -> Int {
+//
+//    // 순열
+//    func permutation(_ array: [String]) -> [String] {
+//        if array.count == 0 { return [] }
+//
+//        let answerArray = (0..<array.count).flatMap { i -> [String] in
+//            var removedArray = array
+//            let elem = removedArray.remove(at: i)
+//            return [elem] + permutation(removedArray).map { elem + $0 }
+//        }
+//
+//        return answerArray
+//    }
+//
+//    // 소수판별
+//    func isPrime(_ num: Int) -> Bool {
+//        print(num)
+//        if(num<4) {
+//            return num == 1 || num == 0 ? false : true
+//        }
+//        for i in 2...Int(sqrt(Double(num))) {
+//            if (num % i == 0) { return false }
+//        }
+//        return true
+//    }
+//
+//    return Set(permutation(numbers.map {String($0)}).map{Int($0)!}).filter {isPrime($0)}.count
+//}
+
+// MARK: 카펫 (Lv.2)
+// Leo는 카펫을 사러 갔다가 아래 그림과 같이 중앙에는 노란색으로 칠해져 있고 테두리 1줄은 갈색으로 칠해져 있는 격자 모양 카펫을 봤습니다. Leo는 집으로 돌아와서 아까 본 카펫의 노란색과 갈색으로 색칠된 격자의 개수는 기억했지만, 전체 카펫의 크기는 기억하지 못했습니다. Leo가 본 카펫에서 갈색 격자의 수 brown, 노란색 격자의 수 yellow가 매개변수로 주어질 때 카펫의 가로, 세로 크기를 순서대로 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+
+//func solution(_ brown:Int, _ yellow:Int) -> [Int] {
+//    let line = ((brown-4)/2)
+//    var top = 0
+//    (1...Int(ceil(Double(line)/2))).forEach {
+//        print($0)
+//        if $0 * (line - $0) == yellow {
+//            top = $0
+//        }
+//    }
+//    return [top + 2, line - top + 2].sorted(by: >)
+//}
+
+// MARK: 피로도 (Lv.2)
+// XX게임에는 피로도 시스템(0 이상의 정수로 표현합니다)이 있으며, 일정 피로도를 사용해서 던전을 탐험할 수 있습니다. 이때, 각 던전마다 탐험을 시작하기 위해 필요한 "최소 필요 피로도"와 던전 탐험을 마쳤을 때 소모되는 "소모 피로도"가 있습니다. "최소 필요 피로도"는 해당 던전을 탐험하기 위해 가지고 있어야 하는 최소한의 피로도를 나타내며, "소모 피로도"는 던전을 탐험한 후 소모되는 피로도를 나타냅니다. 예를 들어 "최소 필요 피로도"가 80, "소모 피로도"가 20인 던전을 탐험하기 위해서는 유저의 현재 남은 피로도는 80 이상 이어야 하며, 던전을 탐험한 후에는 피로도 20이 소모됩니다. 이 게임에는 하루에 한 번씩 탐험할 수 있는 던전이 여러개 있는데, 한 유저가 오늘 이 던전들을 최대한 많이 탐험하려 합니다. 유저의 현재 피로도 k와 각 던전별 "최소 필요 피로도", "소모 피로도"가 담긴 2차원 배열 dungeons 가 매개변수로 주어질 때, 유저가 탐험할수 있는 최대 던전 수를 return 하도록 solution 함수를 완성해주세요.
 
 // ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
@@ -213,11 +305,26 @@ print(solution("1231234", 3))
 //        let moveFront = startIdx * 2 + (name.count - endIdx)
 //        let moveBack = (name.count - endIdx) * 2 + startIdx
 //
-//        leftright = min(leftright, moveFront)
-//        leftright = min(leftright, moveBack)
+//        leftright = min(leftright, moveFront, moveBack)
+//
+//        print("\(startIdx)...\(endIdx)      \(leftright)...\(moveFront)...\(moveBack)")
 //    }
 //
 //    return updown + leftright
+//}
+
+//func solution(_ name:String) -> Int {
+//    let names = Array(name)
+//    let a = Int(Character("A").asciiValue)
+//    let a = Int(Character("A").asciiValue)
+//    var updown = 0
+//    var leftright = 0
+//
+//    names.enumerated().forEach { (index, name) in
+//
+//    }
+//
+//    return 0
 //}
 
 // ------------------------------------------------------------------------------------------
@@ -273,31 +380,31 @@ print(solution("1231234", 3))
 //      return node
 //    }
 //  }
-//  
+//
 //  func union(_ a: Int, _ b: Int) {
 //    let a = findParent(a)
 //    let b = findParent(b)
-//    
+//
 //    if a < b {
 //      parent[b] = a
 //    } else {
 //      parent[a] = b
 //    }
 //  }
-//  
+//
 //  var totalCost = 0
 //  var parent = Array(repeating: 0, count: n+1)
 //  (1...n).forEach { parent[$0] = $0 }
-//  
+//
 //  for cost in costs.sorted(by: { $0[2] < $1[2] }) {
 //    let (a, b, dist) = (cost[0], cost[1], cost[2])
-//    
+//
 //    if findParent(a) != findParent(b) {
 //      union(a, b)
 //      totalCost += dist
 //    }
 //  }
-//  
+//
 //  return totalCost
 //}
 //
