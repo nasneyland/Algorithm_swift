@@ -10,7 +10,7 @@
 
 import Foundation
 
-print(solution(2,10,[7,4,5,6]))
+print(solution([["ICN", "SFO"], ["ICN", "ATL"], ["SFO", "ATL"], ["ATL", "ICN"], ["ATL","SFO"]]))
 
 // ------------------------------------------------------------------------------------------
 // ------------------------------------------------------------------------------------------
@@ -274,7 +274,7 @@ print(solution(2,10,[7,4,5,6]))
 
 //func solution(_ operations:[String]) -> [Int] {
 //    var queue = [Int]()
-//    
+//
 //    operations.forEach {
 //        if $0.hasPrefix("I") {
 //            queue.append(Int($0.suffix($0.count - 2))!)
@@ -285,7 +285,7 @@ print(solution(2,10,[7,4,5,6]))
 //            } else {
 //                queue.removeLast()
 //            }
-//            
+//
 //        }
 //    }
 //    return [queue.max() ?? 0, queue.min() ?? 0]
@@ -417,7 +417,7 @@ print(solution(2,10,[7,4,5,6]))
 //            lostSet.remove(reserve + 1)
 //        }
 //    }
-
+//
 //    // 배열을 이용한 풀이
 //    let newReserve = reserve.filter { !lost.contains($0) }
 //    let newLost = lost.filter { !reserve.contains($0) }
@@ -482,18 +482,44 @@ print(solution(2,10,[7,4,5,6]))
 //    return updown + leftright
 //}
 
+//// 스스로 푼 코드
 //func solution(_ name:String) -> Int {
-//    let names = Array(name)
-//    let a = Int(Character("A").asciiValue)
-//    let a = Int(Character("A").asciiValue)
+//    let zValue = Character("Z").asciiValue!
+//    let aValue = Character("A").asciiValue!
+//
 //    var updown = 0
-//    var leftright = 0
+//    var leftright = name.count - 1
 //
-//    names.enumerated().forEach { (index, name) in
+//    var nameList = name.map {String($0)}
+//    var startIdx = 0
+//    var endIdx = 0
 //
+//    name.forEach {
+//        let nameValue = $0.asciiValue!
+//        updown += min(Int(zValue - nameValue + 1), Int(nameValue - aValue))
 //    }
 //
-//    return 0
+//    while startIdx < nameList.count {
+//        if nameList[startIdx] == "A" {
+//            endIdx = startIdx
+//            while endIdx < nameList.count - 1, nameList[endIdx + 1] == "A" {
+//                endIdx += 1
+//            }
+//
+//            if startIdx <= 1 && endIdx == name.count - 1 {
+//                leftright = 0
+//            } else {
+//                let turnLeft = (startIdx <= 1 ? 0 : (startIdx - 1) * 2) + (name.count - endIdx - 1)
+//                let turnRight = (startIdx) + ((name.count - endIdx - 1) * 2 - 1)
+//                leftright = min(leftright, turnLeft, turnRight)
+//            }
+//            startIdx = endIdx + 1
+//        } else {
+//            startIdx += 1
+//        }
+//    }
+//
+//    return updown + leftright
 //}
 
 // MARK: 큰 수 만들기 (Lv.2)
@@ -516,6 +542,26 @@ print(solution(2,10,[7,4,5,6]))
 //    return result + numbers.joined()
 //}
 
+//// 시간 초과
+//func solution(_ number: String, _ k: Int) -> String {
+//    var numList = number.map{ String($0) }
+//    var result = ""
+//
+//    while result.count != number.count - k {
+//        let preList = numList[0...numList.count - (number.count - k - result.count)]
+//        let preMax = preList.max()!
+//        for pre in preList {
+//            if (pre < preMax) {
+//                numList.removeFirst()
+//            } else {
+//                result.append(numList.removeFirst())
+//                break
+//            }
+//        }
+//    }
+//    return result
+//}
+
 //// 스택을 이용한 함수
 //func solution(_ number: String, _ k: Int) -> String {
 //    var result: [Int] = []
@@ -536,66 +582,202 @@ print(solution(2,10,[7,4,5,6]))
 //    return result[0..<(result.count - k + count)].map { "\($0)" }.joined()
 //}
 
-// MARK: 섬 연결하기 (Lv.3)
+//// 스스로 푼 코드 (스택으로)
+//func solution(_ number: String, _ k: Int) -> String {
+//    var numList = number.map{ Int(String($0))! }
+//    var result = [numList.removeFirst()]
+//    var removeCnt = k
+//
+//    for (index,num) in numList.enumerated() {
+//        while removeCnt != 0, !result.isEmpty, result.last! < num {
+//            result.removeLast()
+//            removeCnt -= 1
+//        }
+//        // print("\(index + 1 - (k - removeCnt))...\(number.count - k)")
+//        // if index + 1 - (k - removeCnt) == number.count - k {
+//        //     break
+//        // }
+//        result.append(num)
+//    }
+//
+//    return result.count != number.count - k ? result[0..<number.count - k].map{String($0)}.joined() : result.map{String($0)}.joined()
+//}
+
+// MARK: 섬 연결하기 (Lv.3) (크루스칼 알고리즘)
 // n개의 섬 사이에 다리를 건설하는 비용(costs)이 주어질 때, 최소의 비용으로 모든 섬이 서로 통행 가능하도록 만들 때 필요한 최소 비용을 return 하도록 solution을 완성하세요. 다리를 여러 번 건너더라도, 도달할 수만 있으면 통행 가능하다고 봅니다. 예를 들어 A 섬과 B 섬 사이에 다리가 있고, B 섬과 C 섬 사이에 다리가 있으면 A 섬과 C 섬은 서로 통행 가능합니다.
 
 //func solution(_ n:Int, _ costs:[[Int]]) -> Int {
-//  func findParent(_ node: Int) -> Int {
-//    if parent[node] != node {
-//      return findParent(parent[node])
-//    } else {
-//      return node
+//    var cnt = 0
+//    var parent = (0..<n).map{$0}
+//
+//    func findParent(_ node: Int) -> Int {
+//        if parent[node] == node {
+//            return node
+//        } else {
+//            return findParent(parent[node])
+//        }
 //    }
-//  }
 //
-//  func union(_ a: Int, _ b: Int) {
-//    let a = findParent(a)
-//    let b = findParent(b)
+//    func union(_ a: Int, _ b: Int) {
 //
-//    if a < b {
-//      parent[b] = a
-//    } else {
-//      parent[a] = b
+//        let parentA = findParent(a)
+//        let parentB = findParent(b)
+//
+//        if parentA < parentB {
+//            parent[parentB] = parentA
+//        } else {
+//            parent[parentA] = parentB
+//        }
 //    }
-//  }
 //
-//  var totalCost = 0
-//  var parent = Array(repeating: 0, count: n+1)
-//  (1...n).forEach { parent[$0] = $0 }
+//    costs.sorted {$0[2] < $1[2]}.forEach {
+//        let a = $0[0]
+//        let b = $0[1]
+//        let cost = $0[2]
 //
-//  for cost in costs.sorted(by: { $0[2] < $1[2] }) {
-//    let (a, b, dist) = (cost[0], cost[1], cost[2])
-//
-//    if findParent(a) != findParent(b) {
-//      union(a, b)
-//      totalCost += dist
+//        if findParent(a) != findParent(b) {
+//            union(a,b)
+//            cnt += cost
+//        }
 //    }
-//  }
 //
-//  return totalCost
+//    return cnt
 //}
+
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+// MARK: - 깊이/너비 우선 탐색 (DFS/BFS)
+// 깊이/너비 우선 탐색을 사용해 원하는 답을 찾아보세요.
+// ------------------------------------------------------------------------------------------
+// ------------------------------------------------------------------------------------------
+
+// MARK: 타겟넘버 (Lv.2) (DFS)
+// n개의 음이 아닌 정수들이 있습니다. 이 정수들을 순서를 바꾸지 않고 적절히 더하거나 빼서 타겟 넘버를 만들려고 합니다. 예를 들어 [1, 1, 1, 1, 1]로 숫자 3을 만들려면 다음 다섯 방법을 쓸 수 있습니다. 사용할 수 있는 숫자가 담긴 배열 numbers, 타겟 넘버 target이 매개변수로 주어질 때 숫자를 적절히 더하고 빼서 타겟 넘버를 만드는 방법의 수를 return 하도록 solution 함수를 작성해주세요.
+//-1+1+1+1+1 = 3
+//+1-1+1+1+1 = 3
+//+1+1-1+1+1 = 3
+//+1+1+1-1+1 = 3
+//+1+1+1+1-1 = 3
+
+//func solution(_ numbers:[Int], _ target:Int) -> Int {
+//    var cnt = 0
 //
-//func solution(_ n:Int, _ costs:[[Int]]) -> Int {
-//    var sortedCosts = costs.sorted(by: {$0[2] < $1[2]})
-//    var connect: [Int] = [sortedCosts[0][0], sortedCosts[0][1]]
-//    var answer: Int = sortedCosts[0][2]
+//    func DFS(index: Int, sum: Int) {
+//        if index == numbers.count {
+//            if sum == target { cnt += 1 }
+//            return
+//        } else {
+//            DFS(index: index + 1, sum: sum + numbers[index])
+//            DFS(index: index + 1, sum: sum - numbers[index])
+//        }
+//    }
 //
-//    while(connect.count < n) {
-//        for i in 0 ..< sortedCosts.count {
-//            let cost = sortedCosts[i]
-//            if connect.contains(cost[0]) && !connect.contains(cost[1]) {
-//                connect.append(cost[1])
-//                answer += cost[2]
-//                sortedCosts.remove(at: i)
-//                break
-//            } else if !connect.contains(cost[0]) && connect.contains(cost[1]) {
-//                connect.append(cost[0])
-//                answer += cost[2]
-//                sortedCosts.remove(at: i)
-//                break
+//    DFS(index:0, sum:0)
+//
+//    return cnt
+//}
+
+// MARK: 네트워크 (Lv.3) (BFS)
+// 네트워크란 컴퓨터 상호 간에 정보를 교환할 수 있도록 연결된 형태를 의미합니다. 예를 들어, 컴퓨터 A와 컴퓨터 B가 직접적으로 연결되어있고, 컴퓨터 B와 컴퓨터 C가 직접적으로 연결되어 있을 때 컴퓨터 A와 컴퓨터 C도 간접적으로 연결되어 정보를 교환할 수 있습니다. 따라서 컴퓨터 A, B, C는 모두 같은 네트워크 상에 있다고 할 수 있습니다. 컴퓨터의 개수 n, 연결에 대한 정보가 담긴 2차원 배열 computers가 매개변수로 주어질 때, 네트워크의 개수를 return 하도록 solution 함수를 작성하시오.
+
+//func solution(_ n:Int, _ computers:[[Int]]) -> Int {
+//    
+//    var visited = Array(repeating: false, count: n)
+//    var cnt = 0
+//    
+//    func bfs(_ index: Int) {
+//        visited[index] = true
+//        
+//        for (i, computer) in computers[index].enumerated() {
+//            if !visited[i] && computer == 1 {
+//                bfs(i)
+//            }
+//        }
+//    }
+//    
+//    (0..<n).forEach { index in
+//        if !visited[index] {
+//            bfs(index)
+//            cnt += 1
+//        }
+//    }
+//    return cnt
+//}
+
+// MARK: 단어 변환 (Lv.3) (DFS)
+//두 개의 단어 begin, target과 단어의 집합 words가 있습니다. 아래와 같은 규칙을 이용하여 begin에서 target으로 변환하는 가장 짧은 변환 과정을 찾으려고 합니다. 1. 한 번에 한 개의 알파벳만 바꿀 수 있습니다. 2. words에 있는 단어로만 변환할 수 있습니다. 예를 들어 begin이 "hit", target가 "cog", words가 ["hot","dot","dog","lot","log","cog"]라면 "hit" -> "hot" -> "dot" -> "dog" -> "cog"와 같이 4단계를 거쳐 변환할 수 있습니다. 두 개의 단어 begin, target과 단어의 집합 words가 매개변수로 주어질 때, 최소 몇 단계의 과정을 거쳐 begin을 target으로 변환할 수 있는지 return 하도록 solution 함수를 작성해주세요.
+
+//func solution(_ begin:String, _ target:String, _ words:[String]) -> Int {
+//    var depthList = [Int]()
+//
+//    // 바꿀 수 있는 글자인지 확인하는 함수
+//    func similar(_ a: String, _ b: String) -> Bool {
+//        var cnt = 0
+//        for i in (0..<a.count) {
+//            if a[a.index(a.startIndex, offsetBy: i)] != b[b.index(b.startIndex, offsetBy: i)] {
+//                cnt += 1
+//            }
+//        }
+//        return cnt == 1 ? true : false
+//    }
+//
+//    // 탐색 함수
+//    func dfs(_ word: String, _ depth: Int, _ wordList: [String]) {
+//        if word == target {
+//            depthList.append(depth)
+//            return
+//        }
+//
+//        for w in words {
+//            if !wordList.contains(w) && depth < words.count && similar(word, w) {
+//                dfs(w, depth + 1, wordList + [w])
 //            }
 //        }
 //    }
 //
-//    return answer
+//    dfs(begin, 0, [])
+//
+//    return depthList.min() ?? 0
 //}
+
+// MARK: 여행 경로 (Lv.3) (DFS + back)
+// 주어진 항공권을 모두 이용하여 여행경로를 짜려고 합니다. 항상 "ICN" 공항에서 출발합니다. 항공권 정보가 담긴 2차원 배열 tickets가 매개변수로 주어질 때, 방문하는 공항 경로를 배열에 담아 return 하도록 solution 함수를 작성해주세요.
+
+//func solution(_ tickets:[[String]]) -> [String] {
+//
+//    let tickets = tickets.sorted { $0[1] < $1[1] }
+//    var visited = [Bool](repeating: false, count: tickets.count)
+//    var result: [String] = []
+//
+//    func dfs(city: String) {
+//        // 마지막 탐색인 경우 마지막 종착지 추가하고 종료
+//        if result.count == tickets.count {
+//            result.append(city)
+//            return
+//        }
+//        // 마지막 탐색이 아닌 경우 탐색 시작
+//        for i in 0..<tickets.count {
+//            // 본인이 출발지인 경우, 아직 방문 안했으면 방문하기
+//            if tickets[i][0] == city && !visited[i] {
+//                visited[i] = true
+//                result.append(city)
+//                dfs(city: tickets[i][1])
+//                // 다 탐색하고 왔을 때 개수가 맞으면 종료
+//                if result.count == tickets.count + 1 {
+//                    return
+//                } else {
+//                    // 아니면 해당 루트 취소하고 다시하기
+//                    result.removeLast()
+//                    visited[i] = false
+//                }
+//            }
+//        }
+//    }
+//
+//    dfs(city: "ICN")
+//
+//    return result
+//}
+
+// MARK: 퍼즐 조각 채우기 (Lv.3)
+// 테이블 위에 놓인 퍼즐 조각을 게임 보드의 빈 공간에 적절히 올려놓으려 합니다. 게임 보드와 테이블은 모두 각 칸이 1x1 크기인 정사각 격자 모양입니다. 이때, 다음 규칙에 따라 테이블 위에 놓인 퍼즐 조각을 게임 보드의 빈칸에 채우면 됩니다. 조각은 한 번에 하나씩 채워 넣습니다. 조각을 회전시킬 수 있습니다. 조각을 뒤집을 수는 없습니다. 게임 보드에 새로 채워 넣은 퍼즐 조각과 인접한 칸이 비어있으면 안 됩니다. 다음은 퍼즐 조각을 채우는 예시입니다.
