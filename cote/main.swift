@@ -126,6 +126,21 @@ let intArray = [1,2,3,4,5,6,7,8,9]
 // MARK: - 고급 함수
 
 // ------------------------------------------------------------------------------------------
+// MARK: 최대공약수
+
+func GCD(_ a: Int, _ b: Int) -> Int {
+    let mod: Int = a % b
+    return 0 == mod ? min(a, b) : GCD(b, mod)
+}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 최소공배수
+
+func LCM(_ a: Int, _ b: Int) -> Int {
+    return a * b / GCD(a, b)
+}
+
+// ------------------------------------------------------------------------------------------
 // MARK: Dictionary
 
 var dic = ["height" : 65, "age" : 50]
@@ -159,22 +174,152 @@ func fac(_ n: Int) -> Double {
     return Double((1...n).reduce(1.0){ Double($0) * Double($1) })
 }
 
+func factorial(_ num: Int) -> Int {
+    if num <= 1 { return 1 } //재귀탈출점
+    
+    return (num * factorial(num - 1))
+}
+
+func factorial(_ num1: Int, _ num2: Int) -> Int {
+    if num1 == num2 { return num1 } //재귀탈출점
+    
+    return (num1 * factorial(num1 - 1, num2))
+}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 크루스칼 알고리즘 (부모찾기)
+
+func kruskal(_ n:Int, _ costs:[[Int]]) -> Int {
+    var parent = Array(0..<n)
+    var cost = 0
+    
+    func findParent(_ child: Int) -> Int {
+        if parent[child] != child {
+            parent[child] = findParent(parent[child])
+        }
+        return parent[child]
+    }
+
+    costs.sorted { $0[2] < $1[2] }.forEach { connection in
+        let root1 = findParent(connection[0])
+        let root2 = findParent(connection[1])
+        
+        if root1 != root2 {
+            parent[root1] = root2
+            cost += connection[2]
+        }
+    }
+    
+    return cost
+}
+
+func solution(_ n:Int, _ costs:[[Int]]) -> Int {
+    var parent = Array(0..<n)
+    var cost = 0
+    
+    // 최상위 부모 찾기
+    func findParent(_ node: Int) -> Int {
+        if parent[node] != node {
+            return findParent(parent[node])
+        } else {
+            return node
+        }
+    }
+    
+    // 같은 부모로 엮기
+    func union(_ a: Int, _ b: Int) {
+        let a = findParent(a)
+        let b = findParent(b)
+        
+        if a < b {
+            parent[b] = a
+        } else {
+            parent[a] = b
+        }
+    }
+    
+    costs.sorted{$0[2] < $1[2]}.forEach {
+        let (a, b, dist) = ($0[0], $0[1], $0[2])
+        
+        if findParent(a) != findParent(b) {
+            cost += dist
+            
+            union(a, b)
+        }
+    }
+    
+    return cost
+}
+
+// [[1, 7, 12], [4, 7, 13], [1, 5, 17], [3, 5, 20], [2, 4, 24], [1, 4, 28], [3, 6, 37], [5, 6, 45], [2, 5, 62], [1, 2, 67], [5, 7, 73]]
+//print(kruskal(7, [[1,7,12],[1,4,28],[1,2,67],[1,5,17],[2,4,24],[2,5,62],[3,5,20],[3,6,37],[4,7,13],[5,6,45],[5,7,73]]))
+print(kruskal(4,[[0, 1, 1], [0, 2, 3], [2, 3, 1], [0, 3, 4]]))
 
 // ------------------------------------------------------------------------------------------
 // MARK: 순열
 
 // m개의 공을 원하는 만큼 뽑아서 나열할 수 있는 모든 경우
 func permutation(_ array: [String]) -> Set<String> {
-    if array.count == 0 { return [] }
+    if array.count == 0 { return [] } //재귀탈출점
 
     let answerArray = (0..<array.count).flatMap { i -> [String] in
         var removedArray = array
         let elem = removedArray.remove(at: i)
         return [elem] + permutation(removedArray).map { elem + $0 }
     }
-
     return Set(answerArray)
 }
 
-print(permutation(["a","b","c"]))
+//print(permutation(["a","b","c"]))
 
+// m개의 공 중 n개를 뽑아서 나열할 수 있는 모든 경우
+func permutaion(_ nums: [Int], _ targetNum: Int) -> [[Int]] {
+    var result = [[Int]]()
+    var visited = [Bool](repeating: false, count: nums.count)
+    
+    func permute(_ nowPermute: [Int]) {
+        if nowPermute.count == targetNum {
+            result.append(nowPermute)
+            return
+        }
+        for i in 0..<nums.count {
+            if visited[i] == true {
+                continue
+            }
+            else {
+                visited[i] = true
+                permute(nowPermute + [nums[i]])
+                visited[i] = false
+            }
+        }
+    }
+    permute([])
+    
+    return result
+}
+
+//print(permutaion([1,2,3], 3))
+
+// ------------------------------------------------------------------------------------------
+// MARK: 조합
+
+// m개의 공 중 n개를 뽑아서 나열할 수 있는 모든 경우
+func combination(_ nums: [Int], _ targetNum: Int) -> [[Int]] {
+    var result = [[Int]]()
+    
+    func combi(_ index: Int, _ nowCombi: [Int]) {
+        if nowCombi.count == targetNum {
+            result.append(nowCombi)
+            return
+        }
+        for i in index..<nums.count {
+            combi(i + 1, nowCombi + [nums[i]])
+        }
+    }
+    
+    combi(0, [])
+    
+    return result
+}
+
+//print(combination([1,2,3,4,5], 3))
