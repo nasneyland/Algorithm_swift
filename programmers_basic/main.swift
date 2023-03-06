@@ -491,3 +491,38 @@ import Foundation
 //    }
 //    return stack.reduce(0, +)
 //}
+
+// ------------------------------------------------------------------------------------------
+// MARK: 숫자 짝꿍 (Set-intersection)
+// 두 정수 X, Y의 임의의 자리에서 공통으로 나타나는 정수 k(0 ≤ k ≤ 9)들을 이용하여 만들 수 있는 가장 큰 정수를 두 수의 짝꿍이라 합니다(단, 공통으로 나타나는 정수 중 서로 짝지을 수 있는 숫자만 사용합니다). X, Y의 짝꿍이 존재하지 않으면, 짝꿍은 -1입니다. X, Y의 짝꿍이 0으로만 구성되어 있다면, 짝꿍은 0입니다.
+
+//func solution(_ X:String, _ Y:String) -> String {
+//    var xDic = [Character: Int]()
+//    var yDic = [Character: Int]()
+//    var resultDic = [Character: Int]()
+//
+//    X.forEach {xDic[$0, default: 0] += 1}
+//    Y.forEach {yDic[$0, default: 0] += 1}
+//
+//    xDic.forEach {
+//        let minValue = min(yDic[$0.0, default: 0], $0.1)
+//        if minValue != 0 {resultDic[$0.0, default: 0] = min(yDic[$0.0, default: 0], $0.1)}
+//    }
+//    if (resultDic.isEmpty) {return "-1"}
+//    else if (resultDic.count == 1 && resultDic.filter{$0.0 != "0"}.isEmpty) {return "0"}
+//    else {
+//        return resultDic.sorted {$0.0 > $1.0}.map{String(repeating: $0.0, count: $0.1)}.joined()
+//    }
+//}
+
+//func solution(_ X:String, _ Y:String) -> String {
+//    let arr1 = Array(X)
+//    let arr2 = Array(Y)
+//    let uniqueKey = Set(arr1).intersection(Set(arr2))
+//
+//    var answer = ""
+//    for key in uniqueKey.sorted(by: >) {
+//        answer += String(repeating: key, count: min(arr1.filter{$0 == key}.count, arr2.filter{$0 == key}.count))
+//    }
+//    return answer == "" ? "-1" : ((uniqueKey.count == 1 && uniqueKey.contains("0")) ? "0" : answer)
+//}
